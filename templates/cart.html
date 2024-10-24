@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center">Tu Carrito de Compras</h3>
+
+    {% if cart_items %}
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product.price }}</td>
+                        <td>${{ item.product.price|multiply:item.quantity }}</td>  
+                        <td>
+                            <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h4>Total: ${{ total_price }}</h4> 
+            <a href="{% url 'checkout' %}" class="btn btn-success">Proceder a Pagar</a>
+        </div>
+    {% else %}
+        <p class="text-center">Tu carrito está vacío.</p>
+    {% endif %}
+</div>
+{% endblock %}
