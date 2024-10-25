@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from producto.views import index, about, welcome, contacto, success,register
+from producto.views import index, about, welcome, contacto, success,register, ver_carrito, agregar_al_carrito, eliminar_del_carrito,productos
 from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,11 @@ urlpatterns = [
     path('contacto/', contacto, name='contacto'),
     path('success/', success, name='success'),
     path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
-     path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
+    path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
     path('register/', register, name='register'),
+    path('carrito/', ver_carrito, name='ver_carrito'),
+    path('carrito/agregar/<int:flan_id>/', agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/eliminar/<int:item_id>/',eliminar_del_carrito, name='eliminar_del_carrito'),
+    path('productos/', productos, name='productos'),
+
 ]

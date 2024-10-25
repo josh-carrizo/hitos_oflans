@@ -9,6 +9,7 @@ class Flan(models.Model):
     image_url = models.URLField()
     slug = models.SlugField()
     is_private = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         return self.name
@@ -24,4 +25,17 @@ class ContactForm(models.Model):
     
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    items = models.JSONField()  
+
+    def __str__(self):
+        return f"Carrito de {self.user.username}"
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    flan = models.ForeignKey(Flan, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.flan.name}"
+
+    def get_total(self):
+        return self.quantity * self.flan.price

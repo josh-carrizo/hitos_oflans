@@ -59,15 +59,19 @@ footer{
 }
 
 .img-carrusel {
-    max-height: 50em; /* Ajusta la altura máxima según tu preferencia */
-    object-fit: cover; /* Asegura que la imagen mantenga su relación de aspecto */
+    max-height: 50em; 
+    object-fit: cover; 
 }
 
 button, .btn {
-    background-color: #caf4fa;  /* Cambia este color por el azul que usas */
+    background-color: #caf4fa; 
     color: #72a3b3;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
 }
-
+header img {
+    display: block;
+    margin-left: auto; 
+    margin-right: auto; 
+}
